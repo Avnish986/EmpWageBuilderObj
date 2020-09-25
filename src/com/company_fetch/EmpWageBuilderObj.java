@@ -5,6 +5,7 @@ public class EmpWageBuilderObj {
 	public static final int isFullTime=2;
 	public static final int empRatePerHr=20;
 	public static final int numOfDays=20;
+	public static final int maxHrPerMonth=100;
 	public String attendance()
 	{
 		double empCheck=Math.floor(Math.random()*10)%2;
@@ -20,9 +21,10 @@ public class EmpWageBuilderObj {
 	}
 	public int totalWage()
 	{
-		int empHrs=0, empWage=0, totalEmpWage=0;;
-		for(int day=0;day<numOfDays;day++)
+		int empHrs=0, totalEmpHrs=0, totalWorkingDays=0;
+		while(totalEmpHrs<=maxHrPerMonth && totalWorkingDays<numOfDays)
 		{
+		totalWorkingDays++;
 		int fullPartStatus=(int) empFullPartStatus();
 		switch(fullPartStatus) {
 		case isPartTime:
@@ -36,10 +38,10 @@ public class EmpWageBuilderObj {
 		default:
 		empHrs=0;
 		}
-		empWage=empHrs*empRatePerHr;
-		totalEmpWage+=empWage;
-		System.out.println("Emp Wage : "+empWage);
+		totalEmpHrs+=empHrs;
+		System.out.println("Day#:"+totalWorkingDays+" EmpHrs: "+empHrs);
 		}
+		int totalEmpWage=totalEmpHrs*empRatePerHr;
 		return totalEmpWage;
 	}
 	public static void main(String[] args) {
