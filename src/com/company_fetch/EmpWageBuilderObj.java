@@ -21,20 +21,26 @@ public class EmpWageBuilderObj {
 	{
 		int empHrs=0, empWage=0;
 		int fullPartStatus=(int) empFullPartStatus();
-		if(fullPartStatus==isPartTime)
-			empHrs=4;
-			else if(fullPartStatus==isFullTime)
-			empHrs=8;
-			else
-			empHrs=0;
+		switch(fullPartStatus) {
+		case isPartTime:
+		empHrs=4;
+		break;
+
+		case isFullTime:
+		empHrs=8;
+		break;
+
+		default:
+		empHrs=0;
+		}
 			empWage=empHrs * empRatePerHr;
 			return empWage;
 	}
 	public static void main(String[] args) {
 		System.out.println("Welcome to Employee Wage Computation");
 		EmpWageBuilderObj empobj = new EmpWageBuilderObj();
-		String status = empobj.attendance();
-		System.out.println(status);
+		//String status = empobj.attendance();
+		//System.out.println(status);
 		int wage = empobj.dailyWage();
 		System.out.println("Emp Wage : "+wage);
 	}
